@@ -1,91 +1,126 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import { Transition } from "@headlessui/react";
-import { Link } from "react-scroll";
+import { Button } from "@material-ui/core";
+import { useWeb3React } from '@web3-react/core';
+import { injected } from './Wallet/connectors';
+
 import Image from "next/image";
-import Logo from "../public/streamlineLogo.png";
 
 function Navbar() {
 	const [isOpen, setIsOpen] = useState(false);
+	const { active, account, library, connector, activate, deactivate } = useWeb3React();
+  
+	useEffect(() => {
+	  const connectWalletOnPageLoad = async () => {
+		if (localStorage?.getItem('isWalletConnected') === 'true') {
+		  try {
+			await activate(injected);
+			localStorage.setItem('isWalletConnected', true);
+		  } catch (ex) {
+			console.log(ex);
+		  }
+		}
+	  }
+	  connectWalletOnPageLoad();
+	}, [])
+  
+	async function connect() {
+	  try {
+		await activate(injected)
+		localStorage.setItem('isWalletConnected', true);
+	  } catch (ex) {
+		console.log(ex)
+	  }
+	}
+  
+	async function disconnect() {
+	  try {
+		deactivate();
+		localStorage.setItem('isWalletConnected', false);
+	  } catch (ex) {
+		console.log(ex);
+	  }
+	}
+  
 	return (
 		<div>
-			<nav className=" shadow-sm fixed w-full z-10">
+			<nav className="fixed z-10 w-full shadow-lg ">
 				<div className="w-full">
-					<div className="flex items-center h-20 w-full">
-						<div className="flex items-center  mx-20  justify-between w-full">
-							<div className="flex justify-center items-center flex-shrink-0 ">
-								<h1 className=" font-bold text-xl cursor-pointer">
-									Stream<span className="text-blue-500">line</span>
+					<div className="flex items-center w-full h-20">
+						<div className="flex items-center justify-between w-full mx-20">
+							<div className="flex items-center justify-center flex-shrink-0 ">
+								<h1 className="text-xl font-bold cursor-pointer ">
+									Don<span className="text-black"> Rouch</span>
 								</h1>
+								<Image src="/logoRoque.png" alt="LogoRoque" width={32} height={20}/>
 							</div>
 							<div className="hidden md:block">
-								<div className="ml-10 flex items-baseline space-x-4">
-									<Link
-										activeClass="Home"
-										to="about"
+								<div className="flex items-baseline ml-10 space-x-4">
+									<a
+										href="https://samot.club"
+										target="_blank" rel="noopener noreferrer"
 										smooth={true}
 										offset={50}
 										duration={500}
-										className="cursor-pointer text-blue-600 font-semibold px-3 py-2 text-md hover:font-black"
+										className="px-3 py-2 font-semibold text-black cursor-pointer text-md hover:font-black"
 									>
-										Home
-									</Link>
-									<Link
-										activeClass="about"
-										to="about"
+										Web
+									</a>
+									<a
+										href="https://samot.chat"
+										target="_blank" rel="noopener noreferrer"
 										smooth={true}
 										offset={50}
 										duration={500}
-										className="cursor-pointer hover:bg-blue-600 text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+										className="px-3 py-2 text-sm font-medium text-black rounded-md cursor-pointer hover:bg-black hover:text-white"
 									>
-										About
-									</Link>
-									<Link
+										Discord
+									</a>
+									<a
+										href="https://samot.club"
+										target="_blank" rel="noopener noreferrer"
 										activeClass="work"
 										to="work"
 										smooth={true}
 										offset={50}
 										duration={500}
-										className="cursor-pointer hover:bg-blue-600 text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+										className="px-3 py-2 text-sm font-medium text-black rounded-md cursor-pointer hover:bg-black hover:text-white"
 									>
-										Projects
-									</Link>
+										Opensea
+									</a>
 
-									<Link
+									<a
+										href="https://twitter.com/samotclub"
 										activeClass="Services"
+										target="_blank" rel="noopener noreferrer"
 										to="work"
 										smooth={true}
 										offset={50}
 										duration={500}
-										className="cursor-pointer hover:bg-blue-600 text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+										className="px-3 py-2 text-sm font-medium text-black rounded-md cursor-pointer hover:bg-black hover:text-white"
 									>
-										Services
-									</Link>
-
-									<Link
-										activeClass="contact"
-										to="contact"
-										smooth={true}
-										offset={50}
-										duration={500}
-										className="cursor-pointer bg-blue-600 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-black"
-									>
-										Contact
-									</Link>
+										Twitter
+									</a>
+								{active ?
+								<button  className="px-3 py-2 m-2 text-sm text-red-100 transition-colors duration-150 bg-red-700 rounded-lg focus:shadow-outline hover:bg-red-800"  onClick={disconnect}>Disconnect ...{account.slice(-5)}</button>
+								: 
+								<button  className="px-3 py-2 m-2 text-sm text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800"  onClick={connect}>Connect Wallet</button>
+								}											
 								</div>
 							</div>
 						</div>
-						<div className="mr-10 flex md:hidden ">
+						<div className="flex mr-10 md:hidden ">
 							<button
 								onClick={() => setIsOpen(!isOpen)}
 								type="button"
-								className="bg-blue-600 inline-flex items-center justify-center p-2 rounded-md text-white  hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-800 focus:ring-white"
+								className="inline-flex items-center justify-center p-2 text-white bg-black rounded-md hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-white"
 								aria-controls="mobile-menu"
 								aria-expanded="false"
 							>
 								<span className="sr-only">Open main menu</span>
 								{!isOpen ? (
 									<svg
-										className="block h-6 w-6"
+										className="block w-6 h-6"
 										xmlns="http://www.w3.org/2000/svg"
 										fill="none"
 										viewBox="0 0 24 24"
@@ -101,7 +136,7 @@ function Navbar() {
 									</svg>
 								) : (
 									<svg
-										className="block h-6 w-6"
+										className="block w-6 h-6"
 										xmlns="http://www.w3.org/2000/svg"
 										fill="none"
 										viewBox="0 0 24 24"
@@ -134,65 +169,72 @@ function Navbar() {
 						<div className="md:hidden" id="mobile-menu">
 							<div
 								ref={ref}
-								className="bg-white px-2 pt-2 pb-3 space-y-1 sm:px-3"
-							>
-								<Link
-									href="/home"
-									activeClass="home"
+								className="px-2 pt-2 pb-3 space-y-1 bg-white sm:px-3"
+							><ul>
+								<li>
+								<a
+									href="https://samot.club"
+									target="_blank" rel="noopener noreferrer"
+									activeClass="website"
 									to="home"
 									smooth={true}
 									offset={50}
 									duration={500}
-									className="cursor-pointer hover:bg-blue-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+									className="block px-3 py-2 text-base font-medium text-black rounded-md cursor-pointer hover:bg-black hover:text-white"
 								>
-									Home
-								</Link>
-								<Link
-									href="/about"
+									Website
+								</a>
+								</li>
+								<li>
+								<a
+									href="https://samot.chat"
+									target="_blank" rel="noopener noreferrer"
 									activeClass="about"
 									to="about"
 									smooth={true}
 									offset={50}
 									duration={500}
-									className="cursor-pointer hover:bg-blue-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+									className="block px-3 py-2 text-base font-medium text-black rounded-md cursor-pointer hover:bg-black hover:text-white"
 								>
-									About
-								</Link>
-
-								<Link
-									href="/work"
+									Discord
+								</a>
+								</li>
+								<li>
+								<a
+									href="https://samot.club"
+									target="_blank" rel="noopener noreferrer"
 									activeClass="work"
 									to="work"
 									smooth={true}
 									offset={50}
 									duration={500}
-									className="cursor-pointer hover:bg-blue-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+									className="block px-3 py-2 text-base font-medium text-black rounded-md cursor-pointer hover:bg-black hover:text-white"
 								>
-									Projects
-								</Link>
-								<Link
-									href="/services"
+									Opensea
+								</a>
+								</li>
+								<li>
+								<a
+									href="https://twitter.com/samotclub"
+									target="_blank" rel="noopener noreferrer"
 									activeClass="services"
 									to="services"
 									smooth={true}
 									offset={50}
 									duration={500}
-									className="cursor-pointer hover:bg-blue-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+									className="block px-3 py-2 text-base font-medium text-black rounded-md cursor-pointer hover:bg-black hover:text-white"
 								>
-									Services
-								</Link>
-
-								<Link
-									href="/contact"
-									activeClass="work"
-									to="work"
-									smooth={true}
-									offset={50}
-									duration={500}
-									className="cursor-pointer hover:bg-blue-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-								>
-									Contact
-								</Link>
+									Twitter
+								</a>
+								</li>
+								<li>
+								{active ?
+								<button  className="px-3 py-2 m-2 text-sm text-red-100 transition-colors duration-150 bg-red-700 rounded-lg focus:shadow-outline hover:bg-red-800"  onClick={disconnect}>Disconnect ...{account.slice(-5)}</button>
+								: 
+								<button  className="px-3 py-2 m-2 text-sm text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800"  onClick={connect}>Connect Wallet</button>
+								}					
+								</li>
+							</ul>
 							</div>
 						</div>
 					)}
