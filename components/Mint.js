@@ -2,20 +2,17 @@ import { useState, useEffect } from "react";
 import {ethers} from "ethers";
 import NFTAbi from "../constants/NFTAbi.json";
 import { useWeb3React } from "@web3-react/core";
-import { maxPerTxn,maxId } from "../constants/contractConfig";
-import Image from "next/image";
-import RangeSlider from 'react-bootstrap-range-slider';
-
+import { Input, Button } from '@chakra-ui/react';
+import {maxPerTransaction } from "../constants/contractConfig"
 
 const contractAddress = NFTAbi.address;
 const contractABI = NFTAbi.abi;
 
 const Mint = () => {
-    const [mintAmount,setMintAmount] = useState(1);
-    const [id, setId] = useState(0);
+  const [mintAmount,setMintAmount] = useState(1);
+  const [id, setId] = useState(0);
 	const [loading, setLoading] = useState(true)
 	const [totalMinted, setTotalMinted] = useState(0)
-	const [maxPerTransaction, setMaxPerTransaction] = useState(0)
 	const [saleActive, setSaleActive] = useState(false)
 	const [price, setPrice] = useState(0)
 	const [transactionUrl, setTransactionUrl] = useState("")
@@ -50,11 +47,9 @@ const Mint = () => {
     };
 
     const handleMintIncrement = () => {
-        if (mintAmount >= maxPerTxn) return;
+        if (mintAmount >= maxPerTransaction) return;
         setMintAmount(mintAmount + 1);
     };
-
-	console.log(chainId) // 42
 
     return(
         <div className="flex flex-col items-center justify-center text-center">
@@ -64,12 +59,12 @@ const Mint = () => {
 			(<div>
 				{chainId ==1 ? (
 				<div>
-					<div>
-					<button onClick={handleMintDecrement} className="px-2 py-1 text-lg font-bold text-black bg-gray-300 border border-black rounded-md cursor-pointer py- hover:bg-black hover:text-white"> - </button>
-					<input type="range" min="1" max="5" value={mintAmount}/>
-					<button onClick={handleMintIncrement} className="px-2 py-1 text-lg font-bold text-black bg-gray-300 border border-black rounded-md cursor-pointer py- hover:bg-black hover:text-white"> + </button>
+          <div>
+				  <Button onClick={handleMintDecrement} borderRadius="5px" color="black" cursor="pointer" fontFamily="inherit" padding="10px" marginTop="10px" marginBottom="10px" backgroundColor="#699879" boxShadow="0px 2px 2px 1px #0F0F0F"> - </Button>
+					<Input textAlign="center" readOnly type="number" value={mintAmount} height="40px" width="100px" fontFamily="inherit" paddingLeft="19px" marginTop="10px"/>
+					<Button onClick={handleMintIncrement} borderRadius="5px" color="black" cursor="pointer" fontFamily="inherit" padding="10px" marginTop="10px" marginBottom="10px" backgroundColor="#699879" boxShadow="0px 2px 2px 1px #0F0F0F"> + </Button>
 					</div>
-					<button onClick={handleMint} className="px-3 py-2 text-lg font-bold text-black bg-gray-300 border border-black rounded-md cursor-pointer hover:bg-black hover:text-white"> MINT NOW!</button>
+					<Button onClick={handleMint} borderRadius="5px" color="black" cursor="pointer" fontFamily="inherit" padding="10px" marginTop="10px" marginBottom="10px" backgroundColor="#699879" boxShadow="0px 2px 2px 1px #0F0F0F"> MINT NOW!</Button>
 				</div>
 				) :
 				(<p className="font-bold"> You must be connected to the ethereum mainnet. Check Metamask network. </p>)

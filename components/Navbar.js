@@ -51,7 +51,7 @@ function Navbar() {
 								<h1 className="text-xl font-bold cursor-pointer ">
 									Justo<span className="text-black"> Bolsa</span>
 								</h1>
-								<Image src="/logoRoque.png" alt="LogoRoque" width={32} height={20}/>
+								<Image src="/Justo.webp" alt="Logo" width={32} height={32}/>
 							</div>
 							<div className="hidden md:block">
 								<div className="flex items-baseline ml-10 space-x-4">
