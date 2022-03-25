@@ -1,6 +1,5 @@
 import React, { useState , useEffect} from "react";
 import { Transition } from "@headlessui/react";
-import { Button } from "@material-ui/core";
 import { useWeb3React } from '@web3-react/core';
 import { injected } from './Wallet/connectors';
 
@@ -44,13 +43,13 @@ function Navbar() {
   
 	return (
 		<div>
-			<nav className="fixed z-10 w-full shadow-lg ">
+			<nav className="fixed z-10 w-full bg-white shadow-lg ">
 				<div className="w-full">
 					<div className="flex items-center w-full h-20">
 						<div className="flex items-center justify-between w-full mx-20">
 							<div className="flex items-center justify-center flex-shrink-0 ">
 								<h1 className="text-xl font-bold cursor-pointer ">
-									Don<span className="text-black"> Rouch</span>
+									Justo<span className="text-black"> Bolsa</span>
 								</h1>
 								<Image src="/logoRoque.png" alt="LogoRoque" width={32} height={20}/>
 							</div>
