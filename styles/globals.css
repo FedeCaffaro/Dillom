@@ -2,3 +2,79 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+body,
+#root,
+.bg,
+canvas {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-color: black;
+  background-size: cover;
+  font-family: "TAN-PEARL", sans-serif;
+  font-weight: bold;
+  color: white;
+}
+
+.divider,
+.time {
+  font-size: 1rem;
+}
+
+.diver {
+  padding: 0 2rem;
+}
+
+h1 {
+  z-index: 2;
+  font-size: 1rem;
+  color: #fff;
+}
+
+p{
+  margin-bottom: 10px;
+  font-size: 1rem;
+  color: white;
+}
+
+.timer-inner {
+  /* position: absolute;
+  top: 60%;
+  left: 38%; */
+  color: white;
+  display: flex;
+  /* flex-direction: column; */
+}
+
+.timer-segment {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* .label {
+  font-size: 2rem;
+} */
+
+video {
+  z-index: 1;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+@font-face {
+    font-family: "TAN-PEARL";
+    src: url("/fonts/TanPearl/TAN-PEARL.ttf");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}

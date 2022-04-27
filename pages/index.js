@@ -7,8 +7,18 @@ import NFTs from "../components/NFTs";
 export default function Home() {
 	return (
 		<div>
-			<Navbar />
-			<NFTs />
+			<Head>
+				<link
+				rel="preload"
+				href="/fonts/TanPearl/TAN-PEARL.ttf"
+				as="font"
+				crossOrigin=""
+			/>
+			</Head>
+			<div>
+				<Navbar />
+				<NFTs />
+			</div>
 		</div>
 	);
 }
