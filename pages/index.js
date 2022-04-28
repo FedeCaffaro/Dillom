@@ -14,6 +14,7 @@ export default function Home() {
 				as="font"
 				crossOrigin=""
 			/>
+			<title>RIPGANG X SAMOT CLUB</title>
 			</Head>
 			<div>
 				<Navbar />

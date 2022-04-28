@@ -27,8 +27,8 @@ body {
   font-size: 1rem;
 }
 
-.diver {
-  padding: 0 2rem;
+.divider {
+  padding: 0 0.5rem;
 }
 
 h1 {
@@ -37,19 +37,33 @@ h1 {
   color: #fff;
 }
 
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: calc(100vh - 6rem);
+  overflow: hidden;
+}
+
 p{
   margin-bottom: 10px;
   font-size: 1rem;
   color: white;
 }
 
+.rotate {
+  max-width: 500px;
+  width: 100%;
+  margin-top: 20px;
+  animation: rotation 90s infinite linear;
+}
+
 .timer-inner {
-  /* position: absolute;
-  top: 60%;
-  left: 38%; */
+  margin-top: 20px;
   color: white;
   display: flex;
-  /* flex-direction: column; */
 }
 
 .timer-segment {
@@ -77,4 +91,59 @@ video {
     font-style: normal;
     font-weight: 400;
     font-display: swap;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-359deg);
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+
+}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {}
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .rotate {
+    margin-top: 0px;
+  }
+
+  .label {
+    display: none;
+  }
+
+  .countdown-container {
+    margin-top: -400px;
+  }
+
+}
+
+/* // X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}
+
+/* // XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+  .rotate {
+    max-width: 900px;
+  }
+
+  .label {
+    display: block;
+  }
+
+  .countdown-container {
+    margin-top: -700px;
+  }
+
+  .divider {
+    padding: 0 0.5rem;
+  }
 }

@@ -8,13 +8,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 function NFTs ()  {
 
   return(
-    <div className="flex flex-col items-center justify-center w-screen h-screen" >
-          <img src="/Logo.webp" width={600} height={600} alt="Bohemian GroupLogo" />
-          <div className="-mt-44" >
+    <div className="main-container" >
+          <img src="/Logo.webp" width={600} height={600} alt="Bohemian GroupLogo" className="rotate"/>
+          <div className="countdown-container">
             <Countdown />
           </div>
           <br/>
-          <FontAwesomeIcon icon={faDiscord} className="w-12 h-12 justify-self-end" />
+          <div className="h-12 w-12 mb-1">
+            <a href="https://samot.chat">
+              <FontAwesomeIcon icon={faDiscord}/>
+            </a>
+          </div>
     </div>
   );
 }

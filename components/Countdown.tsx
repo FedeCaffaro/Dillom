@@ -37,7 +37,6 @@ const Countdown: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Countdown Timer</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -53,12 +52,20 @@ const Countdown: NextPage = () => {
           <div className="timer-inner">
             <div className="timer-segment">
               <span className="time">{hours}</span>
-              <span className="label">Horas</span>
+              {hours == 1 ? (
+                <span className="label">Hora</span>
+              ) : (
+                <span className="label">Horas</span>
+              )}
             </div>
             <span className="divider">:</span>
             <div className="timer-segment">
               <span className="time">{minutes}</span>
-              <span className="label">Minutos</span>
+              {minutes == 1 ? (
+                <span className="label">Minuto</span>
+              ) : (
+                <span className="label">Minutos</span>
+              )}
             </div>
             <span className="divider">:</span>
             <div className="timer-segment">

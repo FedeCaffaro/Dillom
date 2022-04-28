@@ -43,7 +43,7 @@ function Navbar() {
   
 	return (
 		<div>
-			<nav className="fixed z-10 w-full bg-black shadow-lg ">
+			<nav className="w-full bg-black">
 				<div className="flex items-center justify-between w-full h-25">
 					<div className="flex items-center justify-center flex-shrink-0 w-1/4">
 						<img 
@@ -99,9 +99,9 @@ function Navbar() {
 					<div className="hidden md:block">
 						<div className="flex items-baseline">
 						{active ?
-						<button  className="px-3 py-2 m-2 text-sm text-red-100 transition-colors duration-150 bg-red-700 rounded-lg focus:shadow-outline hover:bg-red-800"  onClick={disconnect}>Disconnect ...{account.slice(-5)}</button>
+						<button  className="px-6 py-2 m-2 text-sm text-red-100  bg-red-900 transition-colors duration-150 border-2 rounded-lg focus:shadow-outline hover:bg-transparent"  onClick={disconnect}>Disconnect ...{account.slice(-5)}</button>
 						: 
-						<button  className="px-3 py-2 m-2 text-sm text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800"  onClick={connect}>Connect Wallet</button>
+						<button  className="px-6 py-2 m-2 text-sm text-green-100 transition-colors duration-150 border-2 border-red-100 rounded-lg focus:shadow-outline hover:bg-red-900"  onClick={connect}>Connect Wallet</button>
 						}											
 						</div>
 					</div>
@@ -126,17 +126,17 @@ function Navbar() {
 						<div className="md:hidden" id="mobile-menu">
 							<div
 								ref={ref}
-								className="px-2 pt-2 pb-3 space-y-1 bg-white sm:px-3"
+								className="px-2 pt-2 pb-3 space-y-1 z-10 absolute w-full sm:px-3"
 							>
 							<ul>
-								<li>
+								<li className="flex justify-center">
 								{active ?
-								<button  className="px-3 py-2 m-2 text-sm text-red-100 transition-colors duration-150 bg-red-700 rounded-lg focus:shadow-outline hover:bg-red-800"  onClick={disconnect}>Disconnect ...{account.slice(-5)}</button>
+								<button  className="px-6 py-2 text-sm bg-red-900 transition-colors duration-150 border-2 rounded-lg focus:shadow-outline hover:bg-black"  onClick={disconnect}>Disconnect ...{account.slice(-5)}</button>
 								: 
-								<button  className="px-3 py-2 m-2 text-sm text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800"  onClick={connect}>Connect Wallet</button>
+								<button  className="px-6 py-2 text-sm transition-colors duration-150 border-2 border-red-100 rounded-lg focus:shadow-outline hover:bg-red-900"  onClick={connect}>Connect Wallet</button>
 								}					
 								</li>
-								<li>
+								{/* <li>
 								<a
 									href="https://twitter.com/samotclub"
 									target="_blank" rel="noopener noreferrer"
@@ -149,7 +149,7 @@ function Navbar() {
 								>
 									Twitter
 								</a>
-								</li>
+								</li> */}
 							</ul>
 							</div>
 						</div>
